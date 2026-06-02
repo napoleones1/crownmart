@@ -412,12 +412,12 @@ $isSeller    = $isLoggedIn && in_array($sessionUser['role'], ['seller','admin'])
         <div style="font-size:10px;font-weight:700;color:#0f1111;margin-top:2px">Wallet</div>
         <div style="font-size:9px;color:#6b7280" id="wallet-bal-label">${fmt(STATE.user.balance)}</div>
       </label>
-      <label id="pay-transfer" onclick="selectPayment('transfer')"
+      <label id="pay-transfer" onclick="selectPayment('card')"
              style="border:2px solid #e5e7eb;background:#f9fafb;border-radius:6px;padding:8px 4px;text-align:center;cursor:pointer;transition:all .2s">
-        <input type="radio" name="payMethod" value="transfer" style="display:none">
-        <div style="font-size:18px">🏦</div>
-        <div style="font-size:10px;font-weight:700;color:#0f1111;margin-top:2px">Transfer</div>
-        <div style="font-size:9px;color:#6b7280">Bank BCA</div>
+        <input type="radio" name="payMethod" value="card" style="display:none">
+        <div style="font-size:18px">💳</div>
+        <div style="font-size:10px;font-weight:700;color:#0f1111;margin-top:2px">Card</div>
+        <div style="font-size:9px;color:#6b7280">Debit / Credit</div>
       </label>
       <label id="pay-cod" onclick="selectPayment('cod')"
              style="border:2px solid #e5e7eb;background:#f9fafb;border-radius:6px;padding:8px 4px;text-align:center;cursor:pointer;transition:all .2s">
@@ -428,12 +428,36 @@ $isSeller    = $isLoggedIn && in_array($sessionUser['role'], ['seller','admin'])
       </label>
     </div>
 
-    <!-- Info Transfer Bank (muncul jika pilih transfer) -->
-    <div id="transfer-info" style="display:none;background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:10px;margin-bottom:10px;font-size:12px">
-      <div style="font-weight:700;color:#1e40af;margin-bottom:4px">🏦 Transfer ke:</div>
-      <div style="font-family:monospace;color:#1e3a8a">Bank BCA — 1234567890</div>
-      <div style="color:#374151">a/n CrownMart Indonesia</div>
-      <div style="color:#6b7280;font-size:11px;margin-top:4px">Pesanan akan diproses setelah pembayaran dikonfirmasi admin.</div>
+    <!-- Info Card (muncul jika pilih card) -->
+    <div id="transfer-info" style="display:none;background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;padding:12px;margin-bottom:10px;font-size:12px">
+      <div style="font-weight:700;color:#0369a1;margin-bottom:8px">💳 Card Details</div>
+      <div style="margin-bottom:6px">
+        <label style="font-size:10px;font-weight:600;color:#374151;display:block;margin-bottom:3px">Card Number</label>
+        <input type="text" id="card-number" maxlength="19" placeholder="1234 5678 9012 3456"
+               oninput="formatCardNumber(this)"
+               style="width:100%;padding:6px 10px;border:1px solid #bae6fd;border-radius:4px;font-family:monospace;font-size:13px;outline:none;letter-spacing:2px">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div>
+          <label style="font-size:10px;font-weight:600;color:#374151;display:block;margin-bottom:3px">Expiry Date</label>
+          <input type="text" id="card-expiry" maxlength="5" placeholder="MM/YY"
+                 oninput="formatExpiry(this)"
+                 style="width:100%;padding:6px 10px;border:1px solid #bae6fd;border-radius:4px;font-family:monospace;font-size:13px;outline:none">
+        </div>
+        <div>
+          <label style="font-size:10px;font-weight:600;color:#374151;display:block;margin-bottom:3px">CVV</label>
+          <input type="password" id="card-cvv" maxlength="4" placeholder="***"
+                 style="width:100%;padding:6px 10px;border:1px solid #bae6fd;border-radius:4px;font-family:monospace;font-size:13px;outline:none">
+        </div>
+      </div>
+      <div style="margin-top:6px">
+        <label style="font-size:10px;font-weight:600;color:#374151;display:block;margin-bottom:3px">Cardholder Name</label>
+        <input type="text" id="card-name" placeholder="Name on card"
+               style="width:100%;padding:6px 10px;border:1px solid #bae6fd;border-radius:4px;font-size:13px;outline:none;text-transform:uppercase">
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;margin-top:8px">
+        <span style="font-size:11px;color:#6b7280">🔒 Secured by 256-bit SSL encryption</span>
+      </div>
     </div>
 
     <!-- Info COD -->

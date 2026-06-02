@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/config.php';
 
 // Hanya admin
@@ -75,7 +75,7 @@ $summary = [
     'total_users'    => (int)$pdo->query("SELECT COUNT(*) FROM users WHERE role = 'buyer'")->fetchColumn(),
     'total_products' => (int)$pdo->query("SELECT COUNT(*) FROM products")->fetchColumn(),
     'cod_orders'     => (int)$pdo->query("SELECT COUNT(*) FROM orders WHERE payment_method = 'cod'")->fetchColumn(),
-    'transfer_orders'=> (int)$pdo->query("SELECT COUNT(*) FROM orders WHERE payment_method = 'transfer'")->fetchColumn(),
+    'card_orders'=> (int)$pdo->query("SELECT COUNT(*) FROM orders WHERE payment_method = 'card'")->fetchColumn(),
     'wallet_orders'  => (int)$pdo->query("SELECT COUNT(*) FROM orders WHERE payment_method = 'wallet'")->fetchColumn(),
 ];
 

@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../api/config.php';
 $seller = requireLogin('../login.php');
 if (!in_array($seller['role'], ['seller','admin'])) {
@@ -532,7 +532,7 @@ function buildPaymentChart(data, canvasId, existing, setter) {
   if (!ctx) return;
   if (existing) existing.destroy();
   if (!data.length) return;
-  const labels = data.map(d => ({wallet:'💳 Wallet',transfer:'🏦 Transfer',cod:'🚚 COD'}[d.payment_method]||d.payment_method));
+  const labels = data.map(d => ({wallet:'💳 Wallet',card:'💳 Card',cod:'🚚 COD'}[d.payment_method]||d.payment_method));
   const chart = new Chart(ctx, {
     type: 'doughnut',
     data: { labels, datasets:[{data:data.map(d=>parseInt(d.cnt)), backgroundColor:['#f0c14b','#3b82f6','#10b981'], borderWidth:2}] },
@@ -545,7 +545,7 @@ function renderDashRecentOrders(orders) {
   const tbody = document.getElementById('dash-recent-orders');
   if (!tbody) return;
   const statusColors = {Pending:'badge-pending',Processing:'badge-processing',Shipped:'badge-shipped',Delivered:'badge-delivered'};
-  const methodLabel  = {wallet:'💳',transfer:'🏦',cod:'🚚'};
+  const methodLabel  = {wallet:'💳',card:'💳',cod:'🚚'};
   tbody.innerHTML = orders.map(o => `
     <tr>
       <td><code style="font-size:11px">${o.id}</code></td>
@@ -585,7 +585,7 @@ async function renderOrdersTable() {
 
   const statusFilter = document.getElementById('order-filter-status')?.value || '';
   const statusColors = {Pending:'badge-pending',Processing:'badge-processing',Shipped:'badge-shipped',Delivered:'badge-delivered'};
-  const methodLabel  = {wallet:'💳 Wallet',transfer:'🏦 Transfer',cod:'🚚 COD'};
+  const methodLabel  = {wallet:'💳 Wallet',card:'💳 Card',cod:'🚚 COD'};
 
   let orders = sellerData.recentOrders || [];
   if (statusFilter) orders = orders.filter(o => o.status === statusFilter);

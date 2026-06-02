@@ -681,7 +681,7 @@ const addToCart = async (event, productId, fromModal = false) => {
   if (fromModal) closeModal();
 };
 
-// Transfer bank confirmation modal
+// Card payment confirmation (unused - instant approval)
 const showTransferModal = (orderId, total, info) => {
   const el = document.createElement('div');
   el.style.cssText = 'position:fixed;inset:0;z-index:700;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px';
@@ -689,11 +689,11 @@ const showTransferModal = (orderId, total, info) => {
     <div style="background:white;border-radius:12px;max-width:400px;width:100%;padding:28px;box-shadow:0 32px 80px rgba(0,0,0,.4)">
       <div style="text-align:center;margin-bottom:20px">
         <div style="font-size:40px">ðŸ¦</div>
-        <h3 style="font-size:18px;font-weight:800;margin-top:8px">Transfer Bank</h3>
+        <h3 style="font-size:18px;font-weight:800;margin-top:8px">Card Payment</h3>
         <p style="color:#6b7280;font-size:13px;margin-top:4px">Pesanan #${orderId} menunggu pembayaran</p>
       </div>
       <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:16px;margin-bottom:16px">
-        <div style="font-size:12px;color:#6b7280;margin-bottom:6px">Transfer tepat sebesar:</div>
+        <div style="font-size:12px;color:#6b7280;margin-bottom:6px">Charge amount:</div>
         <div style="font-size:28px;font-weight:900;color:#1e40af;font-family:monospace">${fmt(total)}</div>
         <div style="margin-top:12px;font-size:13px">
           <div>ðŸ¦ <strong>${info.bank}</strong></div>
@@ -705,7 +705,7 @@ const showTransferModal = (orderId, total, info) => {
         Pesanan akan diproses oleh admin setelah pembayaran dikonfirmasi.
       </div>
       <button onclick="this.closest('[style]').remove()" style="width:100%;padding:11px;background:#f0c14b;border:1px solid #a88734;color:#0f1111;font-weight:800;font-size:14px;border-radius:6px;cursor:pointer">
-        Mengerti, Saya Akan Transfer
+        OK, Got It
       </button>
     </div>`;
   document.body.appendChild(el);
@@ -784,8 +784,8 @@ let selectedPaymentMethod = 'wallet';
 
 const selectPayment = (method) => {
   selectedPaymentMethod = method;
-  ['wallet','transfer','cod'].forEach(m => {
-    const el = document.getElementById(`pay-${m}`);
+  ['wallet','card','cod'].forEach(m => {
+    const el = document.getElementById(m === 'card' ? 'pay-card' : `pay-${m}`);
     if (!el) return;
     if (m === method) {
       el.style.border = '2px solid #f0c14b';
@@ -795,11 +795,36 @@ const selectPayment = (method) => {
       el.style.background = '#f9fafb';
     }
   });
-  // Show/hide info boxes
   const ti = document.getElementById('transfer-info');
   const ci = document.getElementById('cod-info');
-  if (ti) ti.style.display = method === 'transfer' ? 'block' : 'none';
-  if (ci) ci.style.display = method === 'cod'      ? 'block' : 'none';
+  if (ti) ti.style.display = method === 'card' ? 'block' : 'none';
+  if (ci) ci.style.display = method === 'cod'  ? 'block' : 'none';
+};
+
+// ============================================================
+// CARD HELPERS
+// ============================================================
+const formatCardNumber = (input) => {
+  let v = input.value.replace(/\D/g, '').substring(0, 16);
+  input.value = v.match(/.{1,4}/g)?.join(' ') || v;
+};
+
+const formatExpiry = (input) => {
+  let v = input.value.replace(/\D/g, '').substring(0, 4);
+  if (v.length >= 2) v = v.slice(0,2) + '/' + v.slice(2);
+  input.value = v;
+};
+
+const validateCard = () => {
+  const num  = document.getElementById('card-number')?.value.replace(/\s/g,'') || '';
+  const exp  = document.getElementById('card-expiry')?.value || '';
+  const cvv  = document.getElementById('card-cvv')?.value || '';
+  const name = document.getElementById('card-name')?.value.trim() || '';
+  if (num.length < 16)    return 'Card number must be 16 digits';
+  if (!/^\d{2}\/\d{2}$/.test(exp)) return 'Invalid expiry date (MM/YY)';
+  if (cvv.length < 3)     return 'CVV must be 3-4 digits';
+  if (!name)              return 'Cardholder name is required';
+  return null;
 };
 
 const cartCheckout = async () => {
@@ -831,8 +856,8 @@ const cartCheckout = async () => {
   renderUserUI();
   closeSidebar();
 
-  // Tampilkan info transfer jika pilih transfer bank
-  if (payment === 'transfer' && res.transferInfo) {
+  // Card payment - instant processing
+  if (payment === 'card' && res.transferInfo) {
     showTransferModal(res.orderId, res.total, res.transferInfo);
   } else {
     showSuccessBanner(res.message);

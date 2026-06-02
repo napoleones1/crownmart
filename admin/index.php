@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 require_once __DIR__ . '/../api/config.php';
 $admin = requireAdmin('../login.php');
 $pdo   = getDB();
@@ -667,7 +667,7 @@ $recentUsers = $pdo->query('
           <div class="stat-card green"><div class="stat-icon">💰</div><div class="stat-num" id="rpt-revenue">—</div><div class="stat-label">Total Revenue</div></div>
           <div class="stat-card blue"><div class="stat-icon">🚚</div><div class="stat-num" id="rpt-orders">—</div><div class="stat-label">Total Orders</div></div>
           <div class="stat-card yellow"><div class="stat-icon">⏳</div><div class="stat-num" id="rpt-pending">—</div><div class="stat-label">Pending Orders</div></div>
-          <div class="stat-card purple"><div class="stat-icon">🏦</div><div class="stat-num" id="rpt-transfer">—</div><div class="stat-label">Transfer Orders</div></div>
+          <div class="stat-card purple"><div class="stat-icon">🏦</div><div class="stat-num" id="rpt-card">—</div><div class="stat-label">Transfer Orders</div></div>
           <div class="stat-card orange"><div class="stat-icon">🚚</div><div class="stat-num" id="rpt-cod">—</div><div class="stat-label">COD Orders</div></div>
           <div class="stat-card red"><div class="stat-icon">💳</div><div class="stat-num" id="rpt-wallet">—</div><div class="stat-label">Wallet Orders</div></div>
         </div>
@@ -729,7 +729,7 @@ $recentUsers = $pdo->query('
               <select id="filter-payment" class="form-select" style="width:auto;padding:5px 10px;font-size:12px" onchange="filterOrders()">
                 <option value="">All Methods</option>
                 <option value="wallet">Wallet</option>
-                <option value="transfer">Transfer</option>
+                <option value="card">Card</option>
                 <option value="cod">COD</option>
               </select>
               <select id="filter-status" class="form-select" style="width:auto;padding:5px 10px;font-size:12px" onchange="filterOrders()">
@@ -880,7 +880,7 @@ function renderReportSummary(s) {
   document.getElementById('rpt-revenue').textContent  = fmt(s.total_revenue);
   document.getElementById('rpt-orders').textContent   = s.total_orders;
   document.getElementById('rpt-pending').textContent  = s.pending_orders;
-  document.getElementById('rpt-transfer').textContent = s.transfer_orders;
+  document.getElementById('rpt-card').textContent = s.card_orders;
   document.getElementById('rpt-cod').textContent      = s.cod_orders;
   document.getElementById('rpt-wallet').textContent   = s.wallet_orders;
 }
@@ -915,7 +915,7 @@ function renderPaymentChart(data) {
   const ctx = document.getElementById('payment-chart').getContext('2d');
   if (paymentChart) paymentChart.destroy();
 
-  const labels = data.map(d => ({wallet:'💳 Wallet',transfer:'🏦 Transfer',cod:'🚚 COD'}[d.payment_method] || d.payment_method));
+  const labels = data.map(d => ({wallet:'💳 Wallet',card:'💳 Card',cod:'🚚 COD'}[d.payment_method] || d.payment_method));
   const colors = ['#f0c14b','#3b82f6','#10b981'];
 
   paymentChart = new Chart(ctx, {
@@ -996,7 +996,7 @@ function renderFullOrderTable() {
       if (payFilter)    filtered = filtered.filter(o => o.payment_method === payFilter);
       if (statusFilter) filtered = filtered.filter(o => o.status === statusFilter);
 
-      const methodLabel = {wallet:'💳 Wallet', transfer:'🏦 Transfer', cod:'🚚 COD'};
+      const methodLabel = {wallet:'💳 Wallet', card:'💳 Card', cod:'🚚 COD'};
       const statusColors = {
         Pending:    'badge-pending',
         Processing: 'badge-processing',

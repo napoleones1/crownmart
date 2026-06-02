@@ -66,7 +66,7 @@ if ($method === 'POST') {
     $notes           = trim($data['notes']      ?? '');
 
     // Validasi metode bayar
-    if (!in_array($paymentMethod, ['wallet','transfer','cod'])) {
+    if (!in_array($paymentMethod, ['wallet','card','cod'])) {
         jsonResponse(['error' => 'Metode pembayaran tidak valid'], 422);
     }
     if (!$address) {
@@ -137,10 +137,11 @@ if ($method === 'POST') {
         $pdo->prepare('UPDATE users SET balance = balance - ? WHERE id = ?')
             ->execute([$total, $userId]);
 
-    } elseif ($paymentMethod === 'transfer') {
-        // Transfer bank — menunggu konfirmasi
-        $orderStatus   = 'Pending';
-        $paymentStatus = 'pending';
+    } elseif ($paymentMethod === 'card') {
+        // Kartu Debit/Credit — proses langsung (simulasi)
+        $orderStatus   = 'Processing';
+        $paymentStatus = 'paid';
+        // Kurangi stok akan dilakukan di loop items
 
     } elseif ($paymentMethod === 'cod') {
         // Bayar di tempat — langsung proses
@@ -163,8 +164,8 @@ if ($method === 'POST') {
         $pdo->prepare('INSERT INTO order_items (order_id, product_id, quantity, price_at_purchase) VALUES (?,?,?,?)')
             ->execute([$orderId, $item['productId'], $item['quantity'], $item['price']]);
 
-        // Kurangi stok untuk wallet & COD (transfer tunggu konfirmasi)
-        if ($paymentMethod !== 'transfer') {
+        // Kurangi stok untuk wallet, card & COD
+        if (true) {
             $pdo->prepare('UPDATE products SET stock = GREATEST(0, COALESCE(stock,0) - ?) WHERE id = ?')
                 ->execute([$item['quantity'], $item['productId']]);
         }
@@ -188,9 +189,9 @@ if ($method === 'POST') {
 
     // ---- Pesan sukses berdasarkan metode ----
     $messages = [
-        'wallet'   => "✅ Pembayaran berhasil! Pesanan #$orderId sedang diproses.",
-        'transfer' => "🏦 Pesanan #$orderId dibuat! Silakan transfer ke rekening kami dan upload bukti di halaman pesanan.",
-        'cod'      => "🚚 Pesanan #$orderId dikonfirmasi! Bayar saat barang tiba.",
+        'wallet' => "✅ Pembayaran berhasil! Pesanan #$orderId sedang diproses.",
+        'card'   => "💳 Pembayaran kartu berhasil! Pesanan #$orderId sedang diproses.",
+        'cod'    => "🚚 Pesanan #$orderId dikonfirmasi! Bayar saat barang tiba.",
     ];
 
     jsonResponse([
@@ -202,11 +203,6 @@ if ($method === 'POST') {
         'paymentMethod'  => $paymentMethod,
         'paymentStatus'  => $paymentStatus,
         'message'        => $messages[$paymentMethod],
-        'transferInfo'   => $paymentMethod === 'transfer' ? [
-            'bank'      => 'BCA',
-            'account'   => '1234567890',
-            'name'      => 'CrownMart Indonesia',
-            'amount'    => $total,
-        ] : null,
+        'transferInfo'   => null,
     ]);
 }

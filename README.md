@@ -52,7 +52,7 @@
 | Metode | Keterangan |
 |--------|-----------|
 | 💰 **Wallet** | Saldo virtual, potong otomatis saat checkout |
-| 🏦 **Transfer Bank** | Transfer ke rekening BCA, order status Pending hingga dikonfirmasi admin |
+| 💳 **Debit / Credit Card** | Form input nomor kartu, expiry, CVV — diproses langsung |
 | 🚚 **COD** | Bayar di tempat saat barang tiba |
 
 ### 📦 Status Pemesanan
@@ -282,6 +282,28 @@ crownmart-php/
 | POST | `/api/auth.php` | Login / Register / Logout |
 | GET | `/api/report.php` | Laporan admin |
 | GET | `/api/seller_report.php` | Laporan seller |
+
+---
+
+## 💳 Detail Metode Pembayaran
+
+### 💰 Wallet
+- Saldo virtual tersimpan di akun
+- Top-up gratis via tombol di navbar
+- Saldo terpotong otomatis saat checkout
+- Order langsung **Processing**
+
+### 💳 Debit / Credit Card
+- Input form: Nomor kartu (16 digit), Expiry (MM/YY), CVV, Nama pemegang
+- Format otomatis saat mengetik
+- Validasi client-side sebelum submit
+- Diproses langsung → order **Processing**
+- Dilindungi simulasi 256-bit SSL
+
+### 🚚 COD (Cash on Delivery)
+- Bayar tunai saat kurir tiba
+- Order langsung **Processing**
+- Cocok untuk area yang tidak ingin bayar online
 
 ---
 
