@@ -317,8 +317,8 @@ Proyek ini dikerjakan oleh **4 mahasiswa** Program Studi Teknik Informatika seba
 |----|------|--------|
 | 1 | **Muhamad Haikal** | [![GitHub](https://img.shields.io/badge/napoleones1-181717?style=flat&logo=github)](https://github.com/napoleones1) |
 | 2 | **Novan Wisnu Pratama** | [![GitHub](https://img.shields.io/badge/Nopvan-181717?style=flat&logo=github)](https://github.com/Nopvan) |
-| 3 | **Fadil Muhammad** | — |
-| 4 | **Falah Rabiusani** | — |
+| 3 | **Fadil Muhammad** | [![GitHub](https://img.shields.io/badge/fvdilm-181717?style=flat&logo=github)](https://github.com/fvdilm) |
+| 4 | **Falah Rabiusani** | [![GitHub](https://img.shields.io/badge/filthyfal-181717?style=flat&logo=github)](https://github.com/filthyfal) |
 
 </div>
 
