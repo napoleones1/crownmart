@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![CrownMart Banner](https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=300&fit=crop&q=80)
+![CrownMart Marketplace](screenshots/01-marketplace.png)
 
 [![PHP](https://img.shields.io/badge/PHP-8.0+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
@@ -228,15 +228,22 @@ crownmart-php/
 
 ---
 
-## 📸 Tampilan
+## 📸 Tampilan Aplikasi
 
-| Halaman | Keterangan |
-|---------|-----------|
-| 🏠 Marketplace | Grid produk dengan filter, search, dan live auction countdown |
-| 🔨 Auction Modal | Detail lelang + riwayat bid + quick bid increment |
-| 🛒 Cart Sidebar | Keranjang dengan pilihan metode bayar (Wallet/Transfer/COD) |
-| 📊 Admin Dashboard | Statistik lengkap + grafik + manajemen user/produk/order |
-| 🏪 Seller Dashboard | Laporan penjualan personal + CRUD produk |
+### 🏠 Halaman Marketplace
+![Marketplace](screenshots/01-marketplace.png)
+
+### � Halaman Login & Register
+![Login](screenshots/02-login.png)
+
+### � Admin Dashboard
+![Admin Dashboard](screenshots/03-admin.png)
+
+### 🏪 Seller Dashboard
+![Seller Dashboard](screenshots/04-seller.png)
+
+### 🛒 Keranjang & Pilih Metode Bayar
+![Cart & Payment](screenshots/05-cart.png)
 
 ---
 
