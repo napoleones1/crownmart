@@ -10,8 +10,8 @@
 [![XAMPP](https://img.shields.io/badge/XAMPP-Compatible-FB7A24?style=for-the-badge&logo=apache&logoColor=white)](https://apachefriends.org)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
-**Proyek tugas akhir mata kuliah Pemrograman Web**  
-*Mahasiswa Teknik Informatika — Muhamad Haikal*
+**Proyek Tugas Akhir Mata Kuliah E-Commerce**  
+*Program Studi Teknik Informatika*
 
 [🚀 Demo Fitur](#-fitur-utama) • [📦 Instalasi](#-instalasi) • [🗂️ Struktur](#️-struktur-proyek) • [📊 Database](#-database) • [👤 Akun Demo](#-akun-demo)
 
@@ -21,7 +21,7 @@
 
 ## 📖 Tentang Proyek
 
-**CrownMart** adalah aplikasi web marketplace *hybrid* yang menggabungkan konsep **toko online retail** (seperti Amazon) dan **sistem lelang real-time** (seperti eBay). Proyek ini dibuat sebagai tugas kuliah untuk memahami konsep sistem e-commerce berbasis web.
+**CrownMart** adalah aplikasi web marketplace *hybrid* yang menggabungkan konsep **toko online retail** (seperti Amazon) dan **sistem lelang real-time** (seperti eBay). Proyek ini dibuat sebagai tugas kuliah **E-Commerce** untuk memahami konsep sistem perdagangan elektronik berbasis web.
 
 ### 🎯 Tujuan Pembelajaran
 - Memahami alur **sistem transaksi pembayaran** e-commerce
@@ -29,7 +29,7 @@
 - Membangun **sistem admin** dengan laporan penjualan
 - Penerapan **sistem autentikasi** (Login, Register, Role-based Access)
 - Mengelola **status pemesanan** dari Pending hingga Delivered
-- Integrasi **multi metode pembayaran**: Wallet, Transfer Bank, COD
+- Integrasi **multi metode pembayaran**: Wallet, Kartu Debit/Credit, COD
 
 ---
 
@@ -307,14 +307,18 @@ crownmart-php/
 
 ---
 
-## 👨‍💻 Developer
+## 👨‍💻 Tim Pengembang
+
+Proyek ini dikerjakan oleh **4 mahasiswa** Program Studi Teknik Informatika sebagai tugas kelompok mata kuliah **E-Commerce**.
 
 <div align="center">
 
-**Muhamad Haikal**  
-Mahasiswa Teknik Informatika
-
-[![GitHub](https://img.shields.io/badge/GitHub-napoleones1-181717?style=for-the-badge&logo=github)](https://github.com/napoleones1)
+| No | Nama | GitHub |
+|----|------|--------|
+| 1 | **Muhamad Haikal** | [![GitHub](https://img.shields.io/badge/napoleones1-181717?style=flat&logo=github)](https://github.com/napoleones1) |
+| 2 | **Novan Wisnu Pratama** | [![GitHub](https://img.shields.io/badge/Nopvan-181717?style=flat&logo=github)](https://github.com/Nopvan) |
+| 3 | **Fadil Muhammad** | — |
+| 4 | **Falah Rabiusani** | — |
 
 </div>
 
@@ -322,13 +326,15 @@ Mahasiswa Teknik Informatika
 
 ## 📄 Lisensi
 
-Proyek ini dibuat untuk keperluan **tugas kuliah** mata kuliah Pemrograman Web.  
+Proyek ini dibuat untuk keperluan **tugas kelompok** mata kuliah **E-Commerce**, Program Studi Teknik Informatika.  
 Bebas digunakan sebagai referensi pembelajaran.
 
 ---
 
 <div align="center">
 
-Made with ❤️ by **Muhamad Haikal** — Teknik Informatika
+Made with ❤️ by **Tim CrownMart** — Teknik Informatika
+
+**Muhamad Haikal · Novan Wisnu Pratama · Fadil Muhammad · Falah Rabiusani**
 
 </div>
