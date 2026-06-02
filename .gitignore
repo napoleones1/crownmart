@@ -1,0 +1,24 @@
+# Environment & config sensitif
+.env
+.env.local
+
+# XAMPP / server files
+*.log
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Upload folder (kalau ada)
+uploads/
+
+# Node (kalau ada)
+node_modules/
